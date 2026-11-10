@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>XG Bar &amp; Lounge &amp; Guesthouse</title>
+<meta name="description" content="XG Bar &amp; Lounge and Guesthouse: cocktails, live events and comfortable rooms. Enquire on WhatsApp.">
+<meta property="og:title" content="XG Bar &amp; Lounge &amp; Guesthouse">
+<meta property="og:description" content="Cocktails, live events and comfortable rooms. Enquire on WhatsApp.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23121212'/><text x='32' y='43' font-size='30' font-weight='800' text-anchor='middle' fill='%23d4af37' font-family='Arial'>XG</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#121212;--bg2:#1a1a1a;--card:#1f1e1b;--line:#33302a;--tx:#f5f5f0;--mu:#a9a598;--gold:#d4af37;--gold2:#ecd58a;--wa:#25d366;
+--serif:'Syne',system-ui,sans-serif;--sans:'Outfit',system-ui,sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+html{scroll-behavior:smooth;scroll-padding-top:calc(72px + env(safe-area-inset-top,0px))}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--tx);font:400 16px/1.65 var(--sans);overflow-x:hidden}
+img,video{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:auto;padding:0 22px}
+nav{position:fixed;top:0;left:0;right:0;z-index:20;padding:calc(14px + env(safe-area-inset-top,0px)) 0 14px;background:linear-gradient(#121212ee,#12121299);backdrop-filter:blur(14px);border-bottom:1px solid #ffffff10}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font:800 22px var(--serif);letter-spacing:.08em;text-transform:uppercase}
+.logo b{color:var(--gold);font-weight:600}
+.links{display:flex;gap:26px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mu)}
+.links a:hover{color:var(--gold2)}
+.burger{display:none;background:none;border:1px solid var(--line);width:44px;height:44px;cursor:pointer;flex:none;padding:0}
+.burger span{display:block;width:20px;height:2px;background:var(--gold);margin:5px auto}
+@media(max-width:820px){.burger{display:block}.links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:#121212f5;padding:22px;gap:20px;border-bottom:1px solid var(--line)}.links.open{display:flex}nav>.wrap>.btn{padding:11px 16px}}
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+.tabs button{background:none;border:1px solid var(--line);color:var(--mu);padding:11px 22px;font:500 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+.tabs button.on{border-color:var(--gold);color:var(--gold2);background:#d4af3712}
+.menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));column-gap:60px}
+.mrow{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.mrow b{font:600 20px var(--serif);display:block}.mrow span{color:var(--mu);font-size:14px;font-weight:300}.mrow em{font:600 20px var(--serif);font-style:normal;color:var(--gold)}
+.rooms{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:40px}
+.room{background:var(--card);border:1px solid var(--line);padding:28px}
+.room h3{font:600 26px var(--serif)}.room .price{color:var(--gold);font:600 30px var(--serif);margin:8px 0 14px}.room small{font-size:13px;color:var(--mu)}
+.room ul{list-style:none;padding:0;margin:0 0 22px;color:var(--mu);font-size:14px}.room li{padding:6px 0;border-bottom:1px solid var(--line)}
+.revs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.rev{background:var(--card);border:1px solid var(--line);padding:28px}
+.rev .st{color:var(--gold);letter-spacing:.2em}.rev p{margin:12px 0;font:500 20px/1.4 var(--serif)}.rev small{color:var(--mu)}
+.hrs{list-style:none;padding:0}.hrs li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);color:var(--mu)}.hrs li b{color:var(--tx);font-weight:500}
+
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;border:1px solid var(--gold);color:var(--gold2);font:500 12px var(--sans);letter-spacing:.18em;text-transform:uppercase;background:none;cursor:pointer;transition:.3s}
+.btn:hover{background:var(--gold);color:#121212;box-shadow:0 0 24px #d4af3766}
+.btn.solid{background:var(--gold);color:#121212}.btn.solid:hover{background:var(--gold2);color:#121212;box-shadow:0 0 24px #d4af3766}
+.btn.wa{background:var(--wa);border-color:var(--wa);color:#06220f;font-weight:600}
+.hero{min-height:100svh;display:grid;place-items:center;text-align:center;position:relative;padding:120px 0 80px;background:radial-gradient(ellipse at 50% 25%,#4a3a12 0,transparent 60%),radial-gradient(ellipse at 10% 90%,#2a2214 0,transparent 55%),radial-gradient(ellipse at 90% 80%,#33260f 0,transparent 50%),var(--bg)}
+.hero:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,transparent 0 60px,#ffffff04 60px 61px);pointer-events:none}
+.hbg{position:absolute;inset:0;overflow:hidden}
+.hs{position:absolute;inset:-8%;background-size:cover;background-position:center;opacity:0;transition:opacity 1.8s ease;filter:blur(22px) saturate(1.1) brightness(.55);transform:scale(1.12);animation:kb 14s ease-in-out infinite alternate}
+.hs video{width:100%;height:100%;object-fit:cover}
+.hs.on{opacity:1}
+@keyframes kb{from{transform:scale(1.12) translate(0,0)}to{transform:scale(1.28) translate(-2%,2%)}}
+.hero:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(#12121299,#12121266 45%,#121212)}
+.hero .wrap{position:relative;z-index:2}
+@media(prefers-reduced-motion:reduce){.hs{animation:none}}
+#intro{position:fixed;inset:0;z-index:100;display:grid;place-items:center;text-align:center;padding:24px;background:radial-gradient(ellipse at 50% 35%,#4a3a12 0,#121212 70%);transition:opacity .9s,visibility .9s}
+#intro.off{opacity:0;visibility:hidden}
+#intro .big{font:800 clamp(90px,26vw,220px)/1 var(--serif);background:linear-gradient(90deg,var(--gold),var(--gold2));-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.03em}
+#intro p{color:var(--mu);letter-spacing:.3em;text-transform:uppercase;font-size:12px;margin:6px 0 34px}
+#intro small{display:block;margin-top:18px;color:var(--mu);font-size:12px}
+.lock{overflow:hidden}
+@media(hover:hover){
+.ev{position:relative}
+.tile,.ev{transition:transform .45s cubic-bezier(.2,.7,.2,1),filter .45s,box-shadow .45s}
+.tile:hover,.ev:hover{transform:scale(1.045);z-index:3;box-shadow:0 20px 55px #000b,0 0 0 1px var(--gold)}
+.grid:hover .tile:not(:hover),.events:hover .ev:not(:hover){filter:blur(4px) brightness(.55);transform:scale(.97)}
+}
+.eyebrow{font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold)}
+h1{font:800 clamp(42px,8.5vw,108px)/1 var(--serif);margin:22px 0;letter-spacing:-.02em;text-transform:uppercase}
+h1 i{font-style:normal;background:linear-gradient(90deg,var(--gold),var(--gold2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{max-width:540px;margin:0 auto 38px;color:var(--mu);font-weight:300}
+.cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+section{padding:110px 0;position:relative}
+section.alt{background:var(--bg2)}
+h2{font:700 clamp(32px,4.6vw,56px)/1.08 var(--serif);margin:14px 0 18px;letter-spacing:-.01em}
+h2 i{font-style:normal;color:var(--gold2)}
+.lead{color:var(--mu);max-width:560px;font-weight:300}
+.head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:46px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.tile{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--card);cursor:pointer;border:1px solid var(--line)}
+.tile:nth-child(5n+1){grid-row:span 1}
+.tile img,.tile video{width:100%;height:100%;object-fit:cover;transition:transform .8s}
+.tile:hover img,.tile:hover video{transform:scale(1.06)}
+.tile .cap{position:absolute;left:0;right:0;bottom:0;padding:40px 18px 16px;background:linear-gradient(transparent,#000c);font:500 20px var(--serif)}
+.ph{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#ffffff88;font-size:11px;letter-spacing:.25em;text-transform:uppercase}
+.ph svg{width:34px;height:34px;margin:0 auto 10px;stroke:var(--gold);fill:none;stroke-width:1.2}
+.art{position:absolute;inset:0;width:100%;height:100%}
+.tag{position:absolute;top:12px;left:12px;background:#000a;padding:4px 10px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2)}
+.events{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
+.ev{background:var(--card);border:1px solid var(--line);overflow:hidden}
+.ev .poster{aspect-ratio:4/5;position:relative;overflow:hidden;background:#000}.ev .poster video{object-fit:contain}
+.ev .poster img,.ev .poster video{width:100%;height:100%;object-fit:cover}
+.ev .body{padding:22px}
+.date{color:var(--gold);font-size:12px;letter-spacing:.22em;text-transform:uppercase}
+.ev h3{font:500 28px var(--serif);margin:6px 0}
+.ev p{color:var(--mu);font-size:14px;font-weight:300}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+@media(max-width:860px){.split{grid-template-columns:1fr;gap:36px}section{padding:80px 0}}
+.form{background:var(--card);border:1px solid var(--line);padding:30px}
+.form h3{font:500 30px var(--serif);margin-bottom:4px}
+.form small{color:var(--mu);display:block;margin-bottom:20px}
+label{display:block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mu);margin:14px 0 6px}
+input,select,textarea{width:100%;background:#0e0e0e;border:1px solid var(--line);color:var(--tx);padding:13px 14px;font:inherit;font-size:15px;border-radius:0}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form .btn{width:100%;justify-content:center;margin-top:22px}
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);margin-top:34px}
+.feat div{background:var(--bg2);padding:18px;text-align:center;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mu)}
+.feat b{display:block;font:500 26px var(--serif);color:var(--gold2);letter-spacing:0;text-transform:none}
+footer{padding:70px 0 40px;border-top:1px solid var(--line);text-align:center}
+.soc{display:flex;gap:14px;justify-content:center;margin:26px 0}
+.soc a{width:52px;height:52px;border:1px solid var(--line);display:grid;place-items:center;transition:.3s}
+.soc a:hover{border-color:var(--gold);background:var(--gold)}
+.soc a:hover svg{stroke:#121212;fill:#121212}
+.soc svg{width:22px;height:22px;fill:var(--tx)}
+footer p{color:var(--mu);font-size:13px}
+.admin-link{background:none;border:0;color:var(--mu);font:inherit;font-size:12px;cursor:pointer;margin-top:14px;text-decoration:underline}
+.wafloat{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:15;width:58px;height:58px;border-radius:50%;background:var(--wa);display:grid;place-items:center;box-shadow:0 8px 30px #0008}
+.wafloat svg{width:30px;height:30px;fill:#fff}
+.rv{opacity:0;transform:translateY(26px);transition:1s cubic-bezier(.2,.7,.2,1)}.rv.in{opacity:1;transform:none}
+.lb{position:fixed;inset:0;background:#000e;z-index:50;display:none;place-items:center;padding:24px}
+.lb.on{display:grid}.lb img,.lb video{max-height:88vh;max-width:94vw}
+#adm{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--bg2);border-left:1px solid var(--gold);z-index:60;transform:translateX(100%);transition:.4s;overflow:auto;padding:calc(24px + env(safe-area-inset-top,0px)) 24px 40px}
+#adm.on{transform:none}
+#adm h3{font:500 30px var(--serif);color:var(--gold2)}
+.mi{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}
+.mi .th{width:46px;height:46px;background:var(--card);flex:none;overflow:hidden}.mi .th img,.mi .th video{width:100%;height:100%;object-fit:cover}
+.mi span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mi button{background:none;border:1px solid var(--line);color:#e88;padding:6px 10px;cursor:pointer}
+.note{color:var(--mu);font-size:13px;margin-top:10px}
+</style>
+</head>
+<body class="lock">
+<div id="intro"><div><div class="eyebrow">Welcome to</div><div class="big">XG</div><p>Bar &amp; Lounge · Guesthouse</p><button class="btn solid" id="enter">Enter</button></div></div>
+<nav><div class="wrap"><a href="#top" class="logo"><b>XG</b> Lounge</a>
+<div class="links"><a href="#lounge">The Lounge</a><a href="#events">Events</a><a href="#menu">Menu</a><a href="#stay">Guest House</a><a href="#book">Enquire</a><a href="#find">Find Us</a></div>
+<a class="btn" href="#stay-enquiry">Book a Stay</a><button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button></div></nav>
+
+<header class="hero" id="top"><div class="hbg" id="hbg"></div><div class="wrap">
+<div class="eyebrow">Bar &amp; Lounge &nbsp;·&nbsp; Guest House</div>
+<h1>Where the night<br><i>meets the stay</i></h1>
+<p>Crafted cocktails, live nights and a quiet room to land in. Drink with us, dance with us, then sleep a few steps away.</p>
+<div class="cta"><a class="btn solid" href="#book">Reserve a Table</a><a class="btn" href="#stay">Explore the Guest House</a></div>
+</div></header>
+
+<section id="lounge"><div class="wrap">
+<div class="head rv"><div><div class="eyebrow">The Lounge</div><h2>Atmosphere, <i>poured</i></h2><p class="lead">Low light, loud music and the best seats in town. A look inside our Bar &amp; Lounge.</p></div></div>
+<div class="grid" id="g-lounge"></div>
+</div></section>
+
+<section class="alt" id="events"><div class="wrap">
+<div class="head rv"><div><div class="eyebrow">What’s On</div><h2>Nights worth <i>showing up</i> for</h2><p class="lead">Live sets, themed nights and special occasions. Watch this space for upcoming posters and flyers.</p></div></div>
+<div class="events" id="g-events"></div>
+</div></section>
+
+<section id="menu"><div class="wrap">
+<div class="head rv"><div><div class="eyebrow">The Menu</div><h2>Taste the <i>night</i></h2><p class="lead">Signature cocktails, cold beer and bar bites. This is a sample menu: items and prices are examples.</p></div><button class="btn" id="dl-menu">Download menu (PDF)</button></div>
+<div class="tabs" id="tabs"></div><div class="menu" id="menu-list"></div>
+</div></section>
+
+<section class="alt" id="book"><div class="wrap split">
+<div class="rv"><div class="eyebrow">Lounge Enquiries</div><h2>Reserve your <i>table</i></h2>
+<p class="lead">Birthdays, private bookings, bottle service or just a good seat. Fill in the details and we’ll continue on WhatsApp with a ready-written message.</p></div>
+<form class="form rv" id="f-lounge"><h3>Bar &amp; Lounge</h3><small>Opens WhatsApp with your message pre-filled.</small>
+<label>Your name</label><input name="name" required placeholder="Full name">
+<label>I’m enquiring about</label><select name="type"><option>a table reservation</option><option>a private function or birthday</option><option>bottle service</option><option>hosting an event or DJ booking</option><option>general information</option></select>
+<div class="row"><div><label>Date</label><input type="date" name="date"></div><div><label>Guests</label><input type="number" min="1" name="guests" placeholder="e.g. 6"></div></div>
+<label>Anything else?</label><textarea name="msg" rows="3" placeholder="Optional"></textarea>
+<button class="btn wa" type="submit">Send on WhatsApp</button></form>
+</div></section>
+
+<section id="stay"><div class="wrap">
+<div class="head rv"><div><div class="eyebrow">The Guest House</div><h2>Rest, <i>refined</i></h2><p class="lead">Comfortable rooms, quiet nights and a short walk from the lounge. Take a look around.</p></div></div>
+<div class="grid" id="g-stay"></div>
+<div class="rooms rv">
+<article class="room"><h3>Standard Room</h3><div class="price">From R650<small> /night</small></div><ul><li>Queen bed</li><li>Free Wi-Fi</li><li>Ensuite bathroom</li><li>TV</li></ul><button class="btn" data-room="Standard room">Enquire</button></article>
+<article class="room"><h3>Double Room</h3><div class="price">From R850<small> /night</small></div><ul><li>King bed</li><li>Free Wi-Fi</li><li>Ensuite bathroom</li><li>Breakfast available</li></ul><button class="btn" data-room="Double room">Enquire</button></article>
+<article class="room"><h3>Family Room</h3><div class="price">From R1,200<small> /night</small></div><ul><li>Sleeps 4</li><li>Two beds</li><li>Free Wi-Fi</li><li>Ensuite bathroom</li></ul><button class="btn" data-room="Family room">Enquire</button></article>
+</div>
+<p class="note" style="margin-top:14px">Sample rooms and rates, to be confirmed.</p>
+<div class="feat rv"><div><b>Quiet</b>Rooms</div><div><b>Wi-Fi</b>Included</div><div><b>Secure</b>Parking</div></div>
+</div></section>
+
+<section class="alt" id="stay-enquiry"><div class="wrap split">
+<div class="rv"><div class="eyebrow">Guest House Enquiries</div><h2>Book your <i>stay</i></h2>
+<p class="lead">Tell us your dates and we’ll confirm availability and rates on WhatsApp. This form is for the Guest House only.</p></div>
+<form class="form rv" id="f-stay"><h3>Guest House</h3><small>Separate from lounge bookings. Opens WhatsApp pre-filled.</small>
+<label>Your name</label><input name="name" required placeholder="Full name">
+<div class="row"><div><label>Check-in</label><input type="date" name="in"></div><div><label>Check-out</label><input type="date" name="out"></div></div>
+<div class="row"><div><label>Guests</label><input type="number" min="1" name="guests" placeholder="e.g. 2"></div><div><label>Room</label><select name="room"><option>Standard room</option><option>Double room</option><option>Family room</option><option>Not sure yet</option></select></div></div>
+<label>Special requests</label><textarea name="msg" rows="3" placeholder="Optional"></textarea>
+<button class="btn wa" type="submit">Check Availability on WhatsApp</button></form>
+</div></section>
+
+<section id="reviews"><div class="wrap">
+<div class="head rv"><div><div class="eyebrow">Guest Love</div><h2>Words from <i>our guests</i></h2><p class="lead">Sample reviews for the prototype. Real guest feedback will replace them.</p></div></div>
+<div class="revs rv">
+<div class="rev"><div class="st">★★★★★</div><p>“The best night out in town. Great drinks and even better music.”</p><small>Sample guest</small></div>
+<div class="rev"><div class="st">★★★★★</div><p>“Clean, quiet rooms and the friendliest hosts. Felt like home.”</p><small>Sample guest</small></div>
+<div class="rev"><div class="st">★★★★★</div><p>“We stayed over after the event. Perfect, and we will be back.”</p><small>Sample guest</small></div>
+</div></div></section>
+
+<section class="alt" id="find"><div class="wrap split">
+<div class="rv"><div class="eyebrow">Find Us</div><h2>Come <i>through</i></h2>
+<p class="lead">123 Main Street, Your Town, Eastern Cape<br>(sample address, to be confirmed)</p>
+<div class="cta" style="justify-content:flex-start;margin-top:28px"><a class="btn solid" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=XG%20Bar%20and%20Lounge">Get directions</a><a class="btn wa" id="find-wa" target="_blank" rel="noopener">WhatsApp us</a></div></div>
+<div class="form rv"><h3>Opening hours</h3><small>Sample hours, to be confirmed.</small>
+<ul class="hrs"><li><b>Monday – Wednesday</b><span>Restaurant</span></li><li><b>Thursday</b><span>Ladies Night · Lounge + Live DJ</span></li><li><b>Friday &amp; Saturday</b><span>Lounge + Live DJ</span></li><li><b>Sunday</b><span>Lounge + Live DJ</span></li><li><b>Guest House check-in</b><span>from 14:00</span></li><li><b>Guest House check-out</b><span>by 10:00</span></li></ul></div>
+</div></section>
+
+<footer><div class="wrap">
+<a href="#top" class="logo"><b>XG</b> Bar &amp; Lounge &amp; Guesthouse</a>
+<div class="soc">
+<a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 7.2A4.8 4.8 0 1 0 12 16.8 4.8 4.8 0 0 0 12 7.2zm0 7.9a3.1 3.1 0 1 1 0-6.2 3.1 3.1 0 0 1 0 6.2zM17.2 6a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zM12 2.9c-2.8 0-3.1 0-4.2.1-3 .1-4.7 1.8-4.8 4.8C2.9 8.900 2.900 9.200 2.900 12s0 3.100.1 4.200c.1 3 1.800 4.700 4.800 4.800 1.100.1 1.400.1 4.200.1s3.100 0 4.200-.1c3-.1 4.700-1.800 4.800-4.800.1-1.100.1-1.400.1-4.200s0-3.100-.1-4.200c-.1-3-1.800-4.700-4.800-4.800C15.100 2.900 14.800 2.900 12 2.900zm0 1.800c2.700 0 3 0 4.100.1 2.100.1 3.100 1.100 3.200 3.200.1 1.100.1 1.400.1 4s0 3-.1 4.100c-.1 2.100-1.100 3.100-3.200 3.200-1.100.1-1.400.1-4.100.1s-3 0-4.100-.1c-2.100-.1-3.100-1.100-3.200-3.200C4.600 15 4.600 14.700 4.600 12s0-3 .1-4.100c.1-2.100 1.100-3.100 3.200-3.200C9 4.700 9.300 4.700 12 4.700z"/></svg></a>
+<a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.500 21v-8h2.700l.4-3.200h-3.100V7.800c0-.9.300-1.500 1.600-1.500h1.700V3.400c-.3 0-1.300-.1-2.400-.1-2.400 0-4.100 1.500-4.100 4.200v2.300H7.500V13h2.800v8z"/></svg></a>
+<a href="https://tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M16.600 3h-3.100v12.400a2.600 2.600 0 1 1-2.600-2.600c.3 0 .5 0 .8.100V9.700a5.800 5.800 0 1 0 4.900 5.700V9a7 7 0 0 0 4 1.300V7.200A4 4 0 0 1 16.600 3z"/></svg></a>
+</div>
+<p>© XG Bar &amp; Lounge &amp; Guesthouse · 18+ only · Please drink responsibly.</p>
+<p style="margin-top:8px">Designed by <a id="designer" target="_blank" rel="noopener" style="color:var(--gold);border-bottom:1px solid var(--gold)">QUANDRO</a></p>
+<button class="admin-link" id="adm-open" hidden>Admin portal</button>
+</div></footer>
+
+<a class="wafloat" id="wafloat" target="_blank" rel="noopener" aria-label="WhatsApp us"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.600 15L2 22l5.200-1.400A10 10 0 1 0 12 2zm5.800 14.100c-.2.700-1.400 1.300-1.900 1.400-.5.100-1.100.1-1.800-.1-.4-.1-1-.3-1.700-.6-3-1.300-4.900-4.300-5.100-4.500-.1-.2-1.200-1.600-1.200-3s.8-2.100 1-2.400c.3-.3.600-.3.800-.3h.600c.2 0 .4 0 .6.500l.8 2c.1.200.1.300 0 .5l-.3.500-.4.400c-.1.100-.3.300-.1.600.2.300.7 1.200 1.500 1.900 1 .9 1.900 1.200 2.200 1.300.3.100.4.100.6-.1l.8-1c.2-.3.400-.2.600-.1l1.900.9c.3.100.5.200.5.300.1.200.1.800-.1 1.500z"/></svg></a>
+
+<div class="lb" id="lb"></div>
+
+<aside id="adm"><div style="display:flex;justify-content:space-between;align-items:center"><h3>Admin portal</h3><button class="admin-link" id="adm-x">Close</button></div>
+<p class="note">Upload photos, videos, posters and flyers. They appear on the site instantly.</p>
+<label>Section</label><select id="a-sec"><option value="lounge">Bar &amp; Lounge gallery</option><option value="stay">Guest House gallery</option><option value="events">Event (poster / flyer / video)</option></select>
+<label>Title</label><input id="a-title" placeholder="e.g. Friday Vibes">
+<div id="a-evf"><label>Event date &amp; details</label><input id="a-date" placeholder="e.g. Sat 22 Nov · 8pm"><input id="a-desc" placeholder="Short description" style="margin-top:8px"></div>
+<label>File (image or video, up to 20 MB)</label><input type="file" id="a-file" accept="image/*,video/*">
+<button class="btn solid" id="a-up" style="width:100%;justify-content:center;margin-top:18px">Upload</button>
+<p class="note" id="a-st"></p>
+<label style="margin-top:30px">WhatsApp number (country code, no +)</label><input id="a-wa" placeholder="27XXXXXXXXX"><button class="btn" id="a-wasave" style="margin-top:10px">Save number</button>
+<h3 style="margin-top:34px;font-size:24px">Uploaded</h3><div id="a-list"></div>
+</aside>
+
+<script>
+const D={wa:'27658938239',name:'XG'};
+const $=s=>document.querySelector(s);
+let media=[],db=null,assets=null,isAdmin=false;
+const PH={lounge:['Signature cocktails','The main bar','Live DJ nights','Lounge seating','Late-night energy','Private booths'],stay:['Double room','Family room','Courtyard','Breakfast nook','Ensuite bathroom','Evening terrace'],events:['Poster coming soon','Poster coming soon','Poster coming soon']};
+const ICON='<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="1"/><circle cx="9" cy="10" r="2"/><path d="M3 18l6-5 4 3 3-2 5 4"/></svg>';
+const esc=s=>String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const isVid=m=>m.type==='video';
+const SEED=[{id:'seed1',section:'events',type:'image',url:'Day%20Dreamer%20Flyer%20Teaser%20Facebook.png',title:'Day Dreamer — Outdoor Experience',date:'Dates TBC',desc:'Quandro and XG Lounge present an outdoor experience. Bring a cooler box and a camp chair. Ice and food will be sold on site.'},{id:'seed2',section:'events',type:'video',url:'Day%20Dreamer%20Video%20Teaser.mp4',title:'Day Dreamer — Teaser',date:'Save the date',desc:'Tap to watch the teaser.'}];
+const SC={lounge:[
+`<path d='M110 190h180l-90 110zM200 300v90M150 390h100'/><circle cx='248' cy='160' r='10'/><path d='M255 150l35-60'/>`,
+`<path d='M70 400V260l14-28v-60h26v60l14 28v140zM180 400V240l16-30v-50h26v50l16 30v160zM290 400V270l14-24v-70h24v70l14 24v130zM40 400h320'/>`,
+`<circle cx='115' cy='290' r='62'/><circle cx='115' cy='290' r='14'/><circle cx='285' cy='290' r='62'/><circle cx='285' cy='290' r='14'/><path d='M178 250h44v100h-44zM60 380h280'/>`,
+`<path d='M60 330v-70q0-30 30-30h220q30 0 30 30v70M40 330h320v50H40zM80 380v20M320 380v20M200 60v110M165 170h70l-15 40h-40z'/>`,
+`<circle cx='200' cy='230' r='95'/><circle cx='200' cy='230' r='65'/><text x='200' y='245' text-anchor='middle' font-size='40' fill='#fff' stroke='none' style='font-family:Syne,sans-serif;font-weight:800'>XG</text>`,
+`<path d='M60 360q0-130 140-130t140 130zM60 360h280M200 190v-40M200 150q-16-26 0-44q16 18 0 44'/>`],
+stay:[
+`<path d='M60 380V190M340 380V280M60 320h280M60 280h280v40M90 280v-30h90v30M200 280v-30h110v30'/>`,
+`<rect x='110' y='80' width='180' height='200'/><path d='M200 80v200M110 180h180M60 380h280M90 380v-60h220v60'/>`,
+`<circle cx='290' cy='90' r='34'/><path d='M180 400V260M180 270q-70-10-90-70q60 0 90 70M180 270q70-10 90-70q-60 0-90 70M180 250q-30-50 0-90q30 40 0 90'/>`,
+`<path d='M110 250h150v60q0 50-75 50t-75-50zM260 270h30q20 0 20 25t-30 25h-20M90 400h190M160 220q-10-25 0-40M210 220q-10-25 0-40'/>`,
+`<path d='M60 250h280v60q0 60-60 60H120q-60 0-60-60zM100 370l-10 30M300 370l10 30M120 250V150q0-30 30-30'/>`,
+`<path d='M40 120q160 70 320 0M110 400v-80h60v80M230 400v-80h60v80M110 320v-60M290 320v-60'/><circle cx='100' cy='148' r='8'/><circle cx='200' cy='162' r='8'/><circle cx='300' cy='148' r='8'/>`]};
+function art(sec,i){const P=[['#3d3010','#d4af37'],['#2c2a24','#f5f5f0'],['#40290f','#c98a3a'],['#2a2518','#b8a068']][i%4],id=sec+i;return `<svg class='art' viewBox='0 0 400 500' preserveAspectRatio='xMidYMid slice'><defs><radialGradient id='${id}' cx='50%' cy='40%' r='70%'><stop offset='0' stop-color='${P[0]}'/><stop offset='1' stop-color='#121212'/></radialGradient></defs><rect width='400' height='500' fill='url(#${id})'/><circle cx='200' cy='250' r='150' fill='${P[1]}' opacity='.08'/><g stroke='${P[1]}' stroke-width='3.5' fill='none' stroke-linecap='round' stroke-linejoin='round' transform='translate(0,40)' style='filter:drop-shadow(0 0 6px ${P[1]})'>${SC[sec][i]}</g></svg>`}
+const T=[['LIVE','DJ NIGHT'],['LADIES','NIGHT'],['SUNDAY','CHILL']];
+function poster(i){const P=['#d4af37','#f5f5f0','#c98a3a'][i%3],t=T[i%3];return `<svg class='art' viewBox='0 0 300 400' preserveAspectRatio='xMidYMid slice'><defs><linearGradient id='p${i}' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#3d3010'/><stop offset='1' stop-color='#121212'/></linearGradient></defs><rect width='300' height='400' fill='url(#p${i})'/><circle cx='150' cy='120' r='80' fill='none' stroke='${P}' stroke-width='3' style='filter:drop-shadow(0 0 8px ${P})'/><g style='font-family:Syne,sans-serif;font-weight:800;text-anchor:middle'><text x='150' y='250' font-size='44' fill='#fff'>${t[0]}</text><text x='150' y='296' font-size='34' fill='${P}'>${t[1]}</text><text x='150' y='350' font-size='11' fill='#fff' opacity='.6' style='letter-spacing:.3em'>SAMPLE POSTER</text></g></svg>`}
+const el=m=>isVid(m)?`<video src="${esc(m.url)}" muted loop playsinline preload="metadata"></video>`:`<img src="${esc(m.url)}" alt="${esc(m.title)}" loading="lazy">`;
+let hk='',ht=null;
+function buildHero(){
+ const ev=media.filter(m=>m.section==='events'),evs=ev.length?ev:SEED,rest=media.filter(m=>m.section!=='events'),P=['50% 6%','50% 50%','50% 94%'],L=[];
+ evs.forEach(m=>{if(isVid(m))L.push({v:1,u:m.url});else P.forEach(p=>L.push({u:m.url,p}))});
+ rest.forEach(m=>L.push(isVid(m)?{v:1,u:m.url}:{u:m.url}));
+ const key=L.map(x=>x.u+(x.p||'')).join('|');if(key===hk)return;hk=key;
+ const box=$('#hbg');clearInterval(ht);
+ box.innerHTML=L.map(x=>x.v?`<div class="hs"><video src="${esc(x.u)}" muted loop playsinline preload="metadata"></video></div>`:`<div class="hs" style="background-image:url('${esc(x.u)}');background-position:${x.p||'center'}"></div>`).join('');
+ const S=[...box.children];if(!S.length)return;
+ let i=Math.floor(Math.random()*S.length);
+ const show=n=>S.forEach((e,k)=>{const on=k===n;e.classList.toggle('on',on);const v=e.querySelector('video');if(v){on?v.play().catch(()=>{}):v.pause()}});
+ show(i);
+ if(S.length>1&&!matchMedia('(prefers-reduced-motion:reduce)').matches)ht=setInterval(()=>{let n;do{n=Math.floor(Math.random()*S.length)}while(n===i);i=n;show(n)},5500);
+}
+function render(){
+ for(const s of ['lounge','stay']){
+  const items=media.filter(m=>m.section===s);
+  $('#g-'+s).innerHTML=items.length?items.map(m=>`<div class="tile" data-id="${m.id}">${el(m)}${m.title?`<div class="cap">${esc(m.title)}</div>`:''}</div>`).join(''):PH[s].map((t,i)=>`<div class="tile">${art(s,i)}<span class="tag">Sample</span><div class="cap">${t}</div></div>`).join('');
+ }
+ const ev0=media.filter(m=>m.section==='events'),ev=ev0.length?ev0:SEED;
+ $('#g-events').innerHTML=ev.length?ev.map(m=>`<article class="ev"><div class="poster" data-id="${m.id}" style="cursor:pointer">${el(m)}</div><div class="body"><div class="date">${esc(m.date)}</div><h3>${esc(m.title)}</h3><p>${esc(m.desc)}</p></div></article>`).join(''):PH.events.map((t,i)=>`<article class="ev"><div class="poster">${poster(i)}</div><div class="body"><div class="date">Date to be announced</div><h3>Upcoming Night</h3><p>Event details will appear here.</p></div></article>`).join('');
+ $('#a-list').innerHTML=media.map(m=>`<div class="mi"><div class="th">${el(m)}</div><span>${esc(m.title||'Untitled')} · ${m.section}</span><button data-del="${m.id}">Delete</button></div>`).join('')||'<p class="note">Nothing uploaded yet.</p>';
+ buildHero();
+}
+document.addEventListener('click',e=>{
+ const t=e.target.closest('[data-id]');
+ if(t&&!e.target.closest('#adm')){const m=media.concat(SEED).find(x=>x.id===t.dataset.id);if(m){$('#lb').innerHTML=isVid(m)?`<video src="${esc(m.url)}" controls autoplay playsinline></video>`:`<img src="${esc(m.url)}" alt="">`;$('#lb').classList.add('on')}}
+ if(e.target.id==='lb'||e.target.closest('#lb')&&!e.target.closest('video')){$('#lb').classList.remove('on');$('#lb').innerHTML=''}
+ const d=e.target.closest('[data-del]');
+ if(d&&db&&confirm('Delete this item?')){db.collection('media').doc(d.dataset.del).delete().catch(()=>alert('Could not delete.'))}
+});
+document.addEventListener('mouseover',e=>{const v=e.target.closest('.tile')?.querySelector('video');if(v)v.play().catch(()=>{})});
+document.addEventListener('mouseout',e=>{const v=e.target.closest('.tile')?.querySelector('video');if(v)v.pause()});
+
+function setWa(n){D.wa=(n||D.wa).replace(/\D/g,'');$('#find-wa').href=$('#wafloat').href=`https://wa.me/${D.wa}?text=`+encodeURIComponent(`Hi ${D.name}, I’d like some information please.`)}
+setWa();
+const fmt=v=>v?new Date(v+'T12:00').toLocaleDateString('en-ZA',{weekday:'short',day:'numeric',month:'long',year:'numeric'}):'';
+const go=txt=>window.open(`https://wa.me/${D.wa}?text=`+encodeURIComponent(txt),'_blank');
+$('#f-lounge').addEventListener('submit',e=>{e.preventDefault();const f=Object.fromEntries(new FormData(e.target));
+ go(`Hi ${D.name} Bar & Lounge! 👋\nMy name is ${f.name}. I’d like to enquire about ${f.type}.`+(f.date?`\nDate: ${fmt(f.date)}`:'')+(f.guests?`\nGuests: ${f.guests}`:'')+(f.msg?`\nNote: ${f.msg}`:'')+`\nPlease let me know what’s available. Thank you!`)});
+$('#f-stay').addEventListener('submit',e=>{e.preventDefault();const f=Object.fromEntries(new FormData(e.target));
+ go(`Hi ${D.name} Guest House! 🛏️\nMy name is ${f.name}. I’d like to check availability for a stay.`+(f.in?`\nCheck-in: ${fmt(f.in)}`:'')+(f.out?`\nCheck-out: ${fmt(f.out)}`:'')+(f.guests?`\nGuests: ${f.guests}`:'')+`\nRoom: ${f.room}`+(f.msg?`\nRequests: ${f.msg}`:'')+`\nCould you share availability and rates? Thank you!`)});
+
+$('#designer').href='https://wa.me/27658938239?text='+encodeURIComponent('Hi QUANDRO! I saw the XG Bar & Lounge & Guesthouse website and I’d like a website for my business.');
+function openSite(){const i=$('#intro');if(!i)return;i.classList.add('off');document.body.classList.remove('lock');setTimeout(()=>i.remove(),1000)}
+$('#enter').onclick=()=>{try{sessionStorage.setItem('xgIn','1')}catch(e){}openSite()};
+try{if(sessionStorage.getItem('xgIn')){$('#intro').remove();document.body.classList.remove('lock')}}catch(e){}
+const MENU_PDF='xg-menu.pdf';
+const MENU={'Cocktails':[['Midnight Old Fashioned','Bourbon, demerara, bitters, orange peel','R95'],['Gold Rush','Bourbon, honey, fresh lemon','R90'],['Espresso Martini','Vodka, coffee liqueur, fresh espresso','R100'],['XG Mojito','Rum, mint, lime, soda','R85']],'Beer & Wine':[['Draught Beer','Ice-cold pint','R35'],['Craft Lager','Local craft, bottle','R45'],['House Red / White','Glass','R55'],['Shots','Tequila, vodka or whisky','R30']],'Bar Bites':[['Peri-Peri Wings','Six wings with dip','R85'],['Loaded Fries','Cheese, bacon, spring onion','R70'],['Beef Sliders','Three mini burgers','R95'],['Sharing Platter','Wings, fries, sliders, dips','R220']]};
+function showMenu(k){$('#tabs').innerHTML=Object.keys(MENU).map(t=>`<button class="${t===k?'on':''}" data-t="${esc(t)}">${esc(t)}</button>`).join('');$('#menu-list').innerHTML=MENU[k].map(r=>`<div class="mrow"><div><b>${esc(r[0])}</b><span>${esc(r[1])}</span></div><em>${r[2]}</em></div>`).join('')}
+$('#tabs').onclick=e=>{const t=e.target.closest('[data-t]');if(t)showMenu(t.dataset.t)};
+showMenu('Cocktails');
+$('#dl-menu').onclick=async()=>{
+ try{const d=await claude.use('downloads');if(d){const b=await (await fetch(MENU_PDF)).blob();await d.save({filename:'XG-Menu.pdf',data:b});return}}catch(e){}
+ const a=document.createElement('a');a.href=MENU_PDF;a.download='XG-Menu.pdf';a.target='_blank';document.body.appendChild(a);a.click();a.remove()
+};
+$('#burger').onclick=()=>$('.links').classList.toggle('open');
+document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',()=>$('.links').classList.remove('open')));
+document.querySelectorAll('[data-room]').forEach(b=>b.addEventListener('click',()=>{$('#f-stay select[name=room]').value=b.dataset.room;$('#stay-enquiry').scrollIntoView({behavior:'smooth'})}));
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(n=>io.observe(n));
+
+// Admin portal
+const secSel=$('#a-sec');const evf=()=>$('#a-evf').style.display=secSel.value==='events'?'block':'none';secSel.onchange=evf;evf();
+$('#adm-open').onclick=()=>$('#adm').classList.add('on');$('#adm-x').onclick=()=>$('#adm').classList.remove('on');
+$('#a-wasave').onclick=async()=>{const n=$('#a-wa').value.replace(/\D/g,'');if(!n||!db)return;try{await db.collection('config').doc('site').set({wa:n});$('#a-st').textContent='Number saved.'}catch(e){$('#a-st').textContent='Could not save.'}};
+$('#a-up').onclick=async()=>{
+ const f=$('#a-file').files[0],st=$('#a-st');
+ if(!f){st.textContent='Choose a file first.';return}
+ if(!assets||!db){st.textContent='Uploads are available to the page owner once published.';return}
+ st.textContent='Uploading…';
+ try{
+  const r=await assets.upload(f);
+  const id='m'+Date.now();
+  await db.collection('media').doc(id).set({section:secSel.value,type:f.type.startsWith('video')?'video':'image',url:r.url,title:$('#a-title').value,date:$('#a-date').value,desc:$('#a-desc').value,ts:Date.now()});
+  st.textContent='Published ✓';$('#a-file').value='';$('#a-title').value='';$('#a-date').value='';$('#a-desc').value='';
+ }catch(e){st.textContent='Upload failed: '+(e.message||'try again')}
+};
+
+// Runtime (loads after first paint; page works without it)
+(async()=>{
+ try{
+  const [u,d,a]=await Promise.all([claude.use('user'),claude.use('db'),claude.use('assets')]);
+  db=d;assets=a;
+  if(u&&await u.canEdit())$('#adm-open').hidden=false;
+  if(!db)return;
+  db.collection('media').onSnapshot(s=>{media=s.docs.map(x=>({id:x.id,...x.data()})).sort((a,b)=>(b.ts||0)-(a.ts||0));render()},()=>{});
+  db.collection('config').doc('site').onSnapshot(s=>{if(s.exists&&s.data().wa)setWa(s.data().wa)},()=>{});
+ }catch(e){}
+})();
+render();
+</script>
+</body>
+</html>
