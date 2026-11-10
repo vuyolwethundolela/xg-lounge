@@ -1,0 +1,64 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>XG Admin</title>
+<style>:root{--bg:#121212;--card:#1f1e1b;--line:#33302a;--tx:#f5f5f0;--mu:#a9a598;--gold:#d4af37}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,sans-serif;padding:20px}.wrap{max-width:1100px;margin:auto}
+h1{color:var(--gold);font-size:22px}h2{font-size:13px;color:var(--gold);text-transform:uppercase;letter-spacing:.12em;margin:0 0 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin:16px 0}.card{background:var(--card);border:1px solid var(--line);padding:18px}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}.kpi div{background:var(--card);border:1px solid var(--line);padding:16px}.kpi b{display:block;font-size:30px;color:var(--gold)}.kpi span{color:var(--mu);font-size:12px}
+.bar{display:flex;align-items:center;gap:10px;font-size:13px;margin:6px 0}.bar i{display:block;height:10px;background:var(--gold);min-width:2px}.bar span:first-child{width:120px;flex:none;color:var(--mu);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+input,select,button{font:inherit;padding:10px;background:#0e0e0e;color:var(--tx);border:1px solid var(--line)}button{cursor:pointer;border-color:var(--gold)}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:8px;border-bottom:1px solid var(--line);text-align:left}.sc{overflow-x:auto}.mu{color:var(--mu)}</style></head><body><div class="wrap">
+<h1>XG Admin Dashboard</h1>
+<form id="login" class="card" style="max-width:380px;display:grid;gap:10px"><input id="em" type="email" placeholder="Email" required><input id="pw" type="password" placeholder="Password" required><button>Sign in</button><button type="button" id="demo">View demo with sample data</button><p id="msg" class="mu"></p></form>
+<div id="app" hidden><p id="dm" class="mu" hidden>Demo mode: sample data only, nothing is saved.</p><p><button id="out">Sign out</button> <button id="ref">Refresh</button></p><div class="kpi" id="kpi"></div><div class="grid" id="charts"></div>
+<div class="card"><h2>Enquiries &amp; orders (mark Confirmed to count real bookings)</h2><div class="sc" id="tbl"></div></div>
+<div class="card" style="margin-top:16px"><h2>Reviews</h2><div id="revs"></div></div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script><script src="config.js"></script>
+<script>
+let DEMO=false,sb=null;try{sb=supabase.createClient(XG_SB.url,XG_SB.key)}catch(e){}
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const cnt=(a,f)=>a.reduce((o,x)=>{const k=f(x);if(k)o[k]=(o[k]||0)+1;return o},{});
+const bars=(o,keep)=>{let e=Object.entries(o);if(!keep)e=e.sort((a,b)=>b[1]-a[1]).slice(0,8);const m=Math.max(1,...e.map(x=>x[1]));return e.length?e.map(([k,v])=>`<div class="bar"><span>${esc(k)}</span><i style="width:${v/m*55}%"></i><span>${v}</span></div>`).join(''):'<p class="mu">No data yet</p>'};
+const card=(t,b)=>`<div class="card"><h2>${t}</h2>${b}</div>`,wd=d=>d.toLocaleDateString('en-ZA',{weekday:'long'});
+async function enter(){
+ const {data:ok}=await sb.rpc('is_admin');
+ if(!ok){await sb.auth.signOut();$('#login').hidden=false;$('#app').hidden=true;return false}
+ $('#login').hidden=true;$('#app').hidden=false;load();return true}
+async function load(){
+ const since=new Date(Date.now()-30*864e5).toISOString();
+ const [v,e,r]=DEMO?sample():await Promise.all([sb.from('visits').select('created_at,device').gte('created_at',since).limit(10000),sb.from('enquiries').select('*').order('created_at',{ascending:false}).limit(1000),sb.from('reviews').select('*').order('created_at',{ascending:false}).limit(200)]);
+ const V=v.data||[],E=e.data||[],R=r.data||[],lo=E.filter(x=>x.kind==='lounge'),st=E.filter(x=>x.kind==='stay'),od=E.filter(x=>x.kind==='order');
+ const days={};for(let i=13;i>=0;i--)days[new Date(Date.now()-i*864e5).toLocaleDateString('en-CA')]=0;
+ V.forEach(x=>{const k=new Date(x.created_at).toLocaleDateString('en-CA');if(k in days)days[k]++});
+ const items={};od.forEach(x=>(x.items||[]).forEach(i=>items[i.n]=(items[i.n]||0)+i.q));
+ const conf=E.filter(x=>x.status==='confirmed').length;
+ $('#kpi').innerHTML=[['Visits (30 days)',V.length],['Visits (7 days)',V.filter(x=>Date.now()-new Date(x.created_at)<7*864e5).length],['Enquiries',E.length],['New / unanswered',E.filter(x=>x.status==='new').length],['Confirmed',conf],['Reviews waiting',R.filter(x=>!x.approved).length]].map(a=>`<div><b>${a[1]}</b><span>${a[0]}</span></div>`).join('');
+ $('#charts').innerHTML=card('Visits, last 14 days',bars(days,1))+card('Devices',bars(cnt(V,x=>x.device)))+card('Enquiries by type',bars(cnt(E,x=>x.kind)))
+ +card('Rooms requested',bars(cnt(st,x=>x.room)))+card('Rooms confirmed',bars(cnt(st.filter(x=>x.status==='confirmed'),x=>x.room)))+card('Stay check-in months',bars(cnt(st,x=>x.check_in&&x.check_in.slice(0,7))))
+ +card('Lounge enquiry types',bars(cnt(lo,x=>x.type)))+card('Lounge nights requested',bars(cnt(lo,x=>x.event_date&&wd(new Date(x.event_date+'T12:00')))))
+ +card('Busiest days for requests',bars(cnt(E,x=>wd(new Date(x.created_at)))))+card('Busiest hours for requests',bars(cnt(E,x=>String(new Date(x.created_at).getHours()).padStart(2,'0')+':00')))+card('Top menu items ordered',bars(items));
+ $('#tbl').innerHTML='<table><tr><th>When</th><th>Type</th><th>Details</th><th>Status</th></tr>'+E.slice(0,50).map(x=>`<tr><td>${new Date(x.created_at).toLocaleString('en-ZA')}</td><td>${x.kind}</td><td>${esc([x.type,x.room,x.event_date,x.check_in&&x.check_in+' → '+x.check_out,x.guests&&x.guests+' guests',x.total&&'R'+x.total].filter(Boolean).join(' · '))}</td><td><select data-s="${x.id}">${['new','confirmed','cancelled'].map(s=>`<option${s===x.status?' selected':''}>${s}</option>`).join('')}</select></td></tr>`).join('')+'</table>';
+ $('#revs').innerHTML=R.map(x=>`<div class="bar" style="align-items:flex-start;gap:14px"><span style="width:auto;color:var(--gold)">${'★'.repeat(x.rating)}</span><span style="white-space:normal;width:auto;flex:1;color:var(--tx)">${esc(x.name)}: ${esc(x.comment)}</span>${x.approved?'<span>Live</span>':`<button data-ap="${x.id}">Approve</button>`}<button data-rm="${x.id}">Delete</button></div>`).join('')||'<p class="mu">No reviews yet</p>'}
+document.addEventListener('change',async e=>{const s=e.target.dataset.s;if(s){if(DEMO){alert('Demo mode: changes are not saved.');load();return}await sb.from('enquiries').update({status:e.target.value}).eq('id',s);load()}});
+document.addEventListener('click',async e=>{const a=e.target.dataset;if(DEMO&&(a.ap||a.rm)){alert('Demo mode: changes are not saved.');return}
+ if(a.ap){await sb.from('reviews').update({approved:true}).eq('id',a.ap);load()}
+ if(a.rm&&confirm('Delete this review?')){await sb.from('reviews').delete().eq('id',a.rm);load()}});
+
+function sample(){const R=a=>a[Math.floor(Math.random()*a.length)],t=d=>new Date(Date.now()-d*864e5).toISOString(),fd=n=>new Date(Date.now()+n*864e5).toLocaleDateString('en-CA');
+ const rooms=['Standard room','Double room','Family room'],ty=['a table reservation','a private function or birthday','bottle service','hosting an event or DJ booking'],it=['Midnight Old Fashioned','Espresso Martini','Peri-Peri Wings','Loaded Fries','Draught Beer'];
+ const V=Array.from({length:240},()=>({created_at:t(Math.random()*30),device:Math.random()<.7?'mobile':'desktop'}));
+ const E=Array.from({length:45},(_,i)=>{const k=R(['lounge','stay','order']),o={id:i,created_at:t(Math.random()*30),kind:k,status:R(['new','confirmed','confirmed','cancelled'])};
+  if(k==='lounge'){o.type=R(ty);o.event_date=fd(Math.floor(Math.random()*30));o.guests=2+Math.floor(Math.random()*8)}
+  if(k==='stay'){const n=Math.floor(Math.random()*60);o.room=R(rooms);o.check_in=fd(n);o.check_out=fd(n+2);o.guests=1+Math.floor(Math.random()*4)}
+  if(k==='order'){o.items=[{n:R(it),q:1+Math.floor(Math.random()*3)},{n:R(it),q:1}];o.total=85+Math.floor(Math.random()*300)}
+  return o}).sort((a,b)=>b.created_at.localeCompare(a.created_at));
+ const Rv=[{id:1,created_at:t(2),name:'Sample guest',rating:5,comment:'Great night and lovely rooms.',approved:false},{id:2,created_at:t(6),name:'Sample guest',rating:4,comment:'Friendly hosts, loved the DJ.',approved:true}];
+ return [{data:V},{data:E},{data:Rv}]}
+$('#demo').onclick=()=>{DEMO=true;$('#login').hidden=true;$('#app').hidden=false;$('#dm').hidden=false;load()};
+$('#ref').onclick=load;$('#out').onclick=async()=>{if(sb&&!DEMO)await sb.auth.signOut();location.reload()};
+$('#login').onsubmit=async e=>{e.preventDefault();if(!sb){$('#msg').textContent='Add your keys to config.js first.';return}$('#msg').textContent='Signing in…';
+ const {error}=await sb.auth.signInWithPassword({email:$('#em').value,password:$('#pw').value});
+ if(error){$('#msg').textContent='Sign-in failed.';return}
+ $('#msg').textContent=(await enter())?'':'This account is not an admin.'};
+if(sb)sb.auth.getSession().then(({data})=>{if(data.session)enter()});
+</script></body></html>
